@@ -8,13 +8,16 @@ function UserForm({ formLogin }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/api/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://loginattbackend.onrender.com/api/save",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         console.log("Data sent successfully");
@@ -24,7 +27,7 @@ function UserForm({ formLogin }) {
         navigate("/youratt");
       } else {
         console.log("Please enter a valid email address");
-        setError("Please enter a correct email address");
+        setError("Please enter a correct email address and password");
       }
     } catch (error) {
       console.error(error);

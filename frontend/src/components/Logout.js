@@ -5,6 +5,7 @@ export default function Logout() {
   const navigate = useNavigate();
   const handleOnClick = (e) => {
     e.preventDefault();
+    localStorage.removeItem("attData");
     navigate("/");
   };
   return (

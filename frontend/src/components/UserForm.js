@@ -23,6 +23,8 @@ function UserForm({ formLogin }) {
         console.log("Data sent successfully");
         setError("");
         const data = await response.json();
+        const jsonData = JSON.stringify(data);
+        localStorage.setItem("attData",jsonData);
         formLogin(data);
         navigate("/youratt");
       } else {

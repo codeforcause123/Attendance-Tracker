@@ -3,7 +3,31 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Skeleton from "@mui/material/Skeleton";
 import Logout from "./Logout";
+function calculateAttendanceMargin(attendedClasses, totalClasses) {
+  const attendancePercentage = (attendedClasses / totalClasses) * 100;
+  const requiredAttendance = 0.75 * totalClasses;
+  const margin = Math.ceil(requiredAttendance - attendedClasses);
 
+  if (attendancePercentage > 75) {
+    return (
+      <span
+        className="text-purple-600 text-xl"
+        style={{ fontFamily: "JetBrains Mono" }}
+      >
+        Margin: {Math.abs(margin)}
+      </span>
+    );
+  } else {
+    return (
+      <span
+        className="text-rose-600 text-xl"
+        style={{ fontFamily: "JetBrains Mono" }}
+      >
+        Required: {Math.abs(margin)}
+      </span>
+    );
+  }
+}
 export default function UserData(props) {
   const [attData, setAttData] = useState([]);
 
@@ -43,7 +67,7 @@ export default function UserData(props) {
                     </div>
                     <div className="pl-2">
                       <p
-                        className="text-green-600 text-xl"
+                        className="text-emerald-400 text-xl"
                         style={{ fontFamily: "JetBrains Mono" }}
                       >
                         Attended: {item.Attended}
@@ -55,11 +79,12 @@ export default function UserData(props) {
                         Conducted: {item.Conducted}
                       </p>
                       <p
-                        className="text-blue-600 text-xl"
+                        className="text-yellow-300 text-xl"
                         style={{ fontFamily: "JetBrains Mono" }}
                       >
                         Attendance: {item.Attendance} %
                       </p>
+                      <p>{calculateAttendanceMargin(item.Attended,item.Conducted)}</p>
                     </div>
                   </div>
                 </div>

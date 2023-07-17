@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserForm from "./components/UserForm";
 import UserData from "./components/UserData";
 import Error from "./components/Error";
+import { AnimatePresence } from "framer-motion";
 const App = () => {
   const [att, setAtt] = useState([]);
   const handleDataFromChild = (data) => {
@@ -11,14 +12,16 @@ const App = () => {
   };
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<UserForm formLogin={handleDataFromChild} />}
-        />
-        <Route path="/youratt" element={<UserData att={att} />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route
+            path="/"
+            element={<UserForm formLogin={handleDataFromChild} />}
+          />
+          <Route path="/youratt" element={<UserData att={att} />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </AnimatePresence>
     </BrowserRouter>
   );
 };

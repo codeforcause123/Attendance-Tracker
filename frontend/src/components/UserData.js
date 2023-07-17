@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Skeleton from "@mui/material/Skeleton";
 import Logout from "./Logout";
+import transition from "../transition";
 function calculateAttendanceMargin(attendedClasses, totalClasses) {
   const attendancePercentage = (attendedClasses / totalClasses) * 100;
   const requiredAttendance = 0.75 * totalClasses;
@@ -28,7 +29,7 @@ function calculateAttendanceMargin(attendedClasses, totalClasses) {
     );
   }
 }
-export default function UserData(props) {
+function UserData(props) {
   const [attData, setAttData] = useState([]);
 
   useEffect(() => {
@@ -84,7 +85,12 @@ export default function UserData(props) {
                       >
                         Attendance: {item.Attendance} %
                       </p>
-                      <p>{calculateAttendanceMargin(item.Attended,item.Conducted)}</p>
+                      <p>
+                        {calculateAttendanceMargin(
+                          item.Attended,
+                          item.Conducted
+                        )}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -100,3 +106,5 @@ export default function UserData(props) {
     </div>
   );
 }
+
+export default transition(UserData);

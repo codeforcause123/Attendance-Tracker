@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import transition from "../transition";
 function UserForm({ formLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +25,7 @@ function UserForm({ formLogin }) {
         setError("");
         const data = await response.json();
         const jsonData = JSON.stringify(data);
-        localStorage.setItem("attData",jsonData);
+        localStorage.setItem("attData", jsonData);
         formLogin(data);
         navigate("/youratt");
       } else {
@@ -102,4 +103,4 @@ function UserForm({ formLogin }) {
   );
 }
 
-export default UserForm;
+export default transition(UserForm);

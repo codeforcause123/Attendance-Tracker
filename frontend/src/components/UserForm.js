@@ -10,7 +10,7 @@ function UserForm({ formLogin }) {
     event.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:4000/api/acadmia",
+        "https://attendance-tracker-baackend.vercel.app/api/acadmia",
         {
           method: "POST",
           headers: {

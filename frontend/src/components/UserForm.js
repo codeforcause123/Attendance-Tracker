@@ -10,7 +10,7 @@ function UserForm({ formLogin }) {
     event.preventDefault();
     try {
       const response = await fetch(
-        "https://attendance-tracker-baackend.vercel.app/api/save",
+        "http://localhost:4000/api/acadmia",
         {
           method: "POST",
           headers: {
@@ -26,7 +26,8 @@ function UserForm({ formLogin }) {
         const data = await response.json();
         const jsonData = JSON.stringify(data);
         localStorage.setItem("attData", jsonData);
-        formLogin(data);
+        console.log(jsonData);
+        // formLogin(data);
         navigate("/youratt");
       } else {
         console.log("Please enter a valid email address");

@@ -29,7 +29,7 @@ function calculateAttendanceMargin(attendedClasses, totalClasses) {
     );
   }
 }
-function UserData(props) {
+function UserData() {
   const [attData, setAttData] = useState([]);
 
   useEffect(() => {
@@ -38,7 +38,8 @@ function UserData(props) {
     const storedData = localStorage.getItem("attData");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-      setAttData(parsedData.transformedData);
+      console.log(parsedData);
+      setAttData(parsedData);
     }
   }, []);
 
@@ -64,14 +65,14 @@ function UserData(props) {
                       className="text-3xl pb-2 font-semibold"
                       style={{ fontFamily: "Montserrat" }}
                     >
-                      {item.Course || <Skeleton animation="wave" />}
+                      {item.Title || <Skeleton animation="wave" />}
                     </div>
                     <div className="pl-2">
                       <p
                         className="text-emerald-400 text-xl"
                         style={{ fontFamily: "JetBrains Mono" }}
                       >
-                        Attended: {item.Attended}
+                        Attended: {item.Conducted - item.Absent}
                       </p>
                       <p
                         className="text-orange-600 text-xl"
@@ -83,11 +84,11 @@ function UserData(props) {
                         className="text-yellow-300 text-xl"
                         style={{ fontFamily: "JetBrains Mono" }}
                       >
-                        Attendance: {item.Attendance} %
+                        Attendance: {item.Attn} %
                       </p>
                       <p>
                         {calculateAttendanceMargin(
-                          item.Attended,
+                          item.Conducted-item.Absent,
                           item.Conducted
                         )}
                       </p>

@@ -38,7 +38,6 @@ function UserData() {
     const storedData = localStorage.getItem("attData");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-      console.log(parsedData);
       setAttData(parsedData);
     }
   }, []);
@@ -48,7 +47,7 @@ function UserData() {
   return (
     <div>
       <Logout />
-      <div className="justify-center bg-gradient-to-tr from-sky-400 to-blue-500 sm:px-16 lg:px-48 py-4">
+      <div className="justify-center bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-300 sm:px-16 lg:px-48 py-4">
         {attData.length
           ? attData.map((item, index) => (
               <div

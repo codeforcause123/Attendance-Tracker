@@ -56,7 +56,7 @@ app.get("/bfhl", (req, res) => {
   res.json({ operation_code: 1 });
 });
 function renameKeys(obj, newKeys) {
-  const keyValues = Object.keys(obj).map(key => {
+  const keyValues = Object.keys(obj).map((key) => {
     const newKey = newKeys[key] || key;
     return { [newKey]: obj[key] };
   });
@@ -91,7 +91,19 @@ const getDataFromAcadmia = async (req, res) => {
       .status(400)
       .json({ error: "Both email and password are required." });
   }
-  const browser = await puppeteer.launch({ headless: 'new' });
+  const browser = await puppeteer.launch({
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    headless: "new",
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
   const page = await browser.newPage();
   try {
     await page.goto("https://academia.srmist.edu.in");
@@ -142,12 +154,12 @@ const getDataFromAcadmia = async (req, res) => {
 
     const jsonTables = HTMLTableToJson.parse(tableContent);
     const tableData = jsonTables.results[0];
-    const updatedData = tableData.map(entry =>
+    const updatedData = tableData.map((entry) =>
       renameKeys(entry, {
         "Course Title": "Title",
         "Hours Conducted": "Conducted",
         "Hours Absent": "Absent",
-        "Attn %": "Attn"
+        "Attn %": "Attn",
       })
     );
     res.json(updatedData);

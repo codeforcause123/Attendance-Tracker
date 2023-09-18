@@ -6,25 +6,33 @@ import Logout from "./Logout";
 import transition from "../transition";
 function calculateAttendanceMargin(attendedClasses, totalClasses) {
   const attendancePercentage = (attendedClasses / totalClasses) * 100;
-  const requiredAttendance = 0.75 * totalClasses;
-  const margin = Math.ceil(requiredAttendance - attendedClasses);
-
   if (attendancePercentage > 75) {
+    let margin = 0;
+    while(Math.floor((attendedClasses/totalClasses)*100>=75.00)){
+      totalClasses++;
+      margin++;
+    }
     return (
       <span
         className="text-purple-600 text-xl"
         style={{ fontFamily: "JetBrains Mono" }}
       >
-        Margin: {Math.abs(margin)}
+        Margin: {Math.abs(margin-1)}
       </span>
     );
   } else {
+    let required = 0;
+    while((attendedClasses/totalClasses)*100 <75){
+      attendedClasses++;
+      totalClasses++;
+      required++;
+    }
     return (
       <span
         className="text-rose-600 text-xl"
         style={{ fontFamily: "JetBrains Mono" }}
       >
-        Required: {Math.abs(margin)}
+        Required: {Math.abs(required)}
       </span>
     );
   }

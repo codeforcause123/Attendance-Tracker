@@ -95,7 +95,7 @@ const getDataFromAcadmia = async (req, res) => {
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
-      "--single-process",
+      // "--single-process",
       "--no-zygote",
     ],
     headless: "new",

@@ -6,7 +6,7 @@ import Logout from "./Logout";
 import transition from "../transition";
 function calculateAttendanceMargin(attendedClasses, totalClasses) {
   const attendancePercentage = (attendedClasses / totalClasses) * 100;
-  if (attendancePercentage > 75) {
+  if (attendancePercentage >= 75) {
     let margin = 0;
     while(Math.floor((attendedClasses/totalClasses)*100>=75.00)){
       totalClasses++;

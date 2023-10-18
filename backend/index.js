@@ -175,17 +175,16 @@ const getDataFromAcadmia = async (req, res) => {
 app.post("/api/quicklrn", getDataFromQuicklrn);
 app.post("/api/acadmia", getDataFromAcadmia);
 const getUsername = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   try {
-    console.log(`Received username: ${email} ${password}`);
-    res.json({ message: "Data received and processed successfully" });
+    res.json({ message: `Hi ${email.slice(0, 6)}` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
   }
 };
-app.post("/api/endpoint", getUsername);
+app.post("/api/getuser", getUsername);
 app.get("/api/data", (req, res) => {
   res.json(savedData);
 });

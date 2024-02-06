@@ -8,7 +8,7 @@ function calculateAttendanceMargin(attendedClasses, totalClasses) {
   const attendancePercentage = (attendedClasses / totalClasses) * 100;
   if (attendancePercentage >= 75) {
     let margin = 0;
-    while(Math.floor((attendedClasses/totalClasses)*100>=75.00)){
+    while (Math.floor((attendedClasses / totalClasses) * 100 >= 75.0)) {
       totalClasses++;
       margin++;
     }
@@ -17,12 +17,12 @@ function calculateAttendanceMargin(attendedClasses, totalClasses) {
         className="text-purple-600 text-xl"
         style={{ fontFamily: "JetBrains Mono" }}
       >
-        Margin: {Math.abs(margin-1)}
+        Margin: {Math.abs(margin - 1)}
       </span>
     );
   } else {
     let required = 0;
-    while((attendedClasses/totalClasses)*100 <75){
+    while ((attendedClasses / totalClasses) * 100 < 75) {
       attendedClasses++;
       totalClasses++;
       required++;
@@ -55,7 +55,7 @@ function UserData() {
   return (
     <div>
       <Logout />
-      <div className="justify-center bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-300 sm:px-16 lg:px-48 py-4">
+      <div className="justify-center bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-300 sm:px-16 lg:px-48 py-4 h-screen">
         {attData.length
           ? attData.map((item, index) => (
               <div
@@ -95,7 +95,7 @@ function UserData() {
                       </p>
                       <p>
                         {calculateAttendanceMargin(
-                          item.Conducted-item.Absent,
+                          item.Conducted - item.Absent,
                           item.Conducted
                         )}
                       </p>

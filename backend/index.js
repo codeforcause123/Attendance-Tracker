@@ -141,7 +141,9 @@ const getDataFromAcadmia = async (req, res) => {
     // Waiting for Navigation
     await page.waitForNavigation();
     //My attendance Page
-    await page.goto("https://academia.srmist.edu.in/#Page:My_Attendance");
+    await page.goto(
+      "https://academia.srmist.edu.in/#Page:My_Attendance?--user-data-dir=&blockAds"
+    );
 
     const tableXPath =
       '//*[@id="zc-viewcontainer_My_Attendance"]/div/div[4]/div/table[3]';
@@ -169,7 +171,7 @@ const getDataFromAcadmia = async (req, res) => {
       .status(500)
       .json({ error: "An error occurred during the login process." });
   } finally {
-    await browser.close();
+    await browser.disconnect();
   }
 };
 app.post("/api/quicklrn", getDataFromQuicklrn);
